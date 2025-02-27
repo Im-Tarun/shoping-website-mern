@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+body, html, #root{
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+}
+
+.btnFocused{
+     border: 2px solid rgba(99, 105, 255, 0);
+     background-color: white;
+     color: black;
+}
+.btnFocused:hover{
+    color: rgb(74, 74, 244);
+}
+/* Hide number input arrows */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox
+input[type="number"] {
+  -moz-appearance: textfield;
+} */
