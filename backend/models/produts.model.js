@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const productSchema = new mongoose.Schema({
     productName : {
         type: String,
-        require: true
+        required: true
     },
     productPrice : {
         type: Number,
-        require: true
+        required: true
     },
     imgLink : {
         type: String,
-        require: true
+        required: true
     }
     },{
         timestamps: true // createAt and updateAt

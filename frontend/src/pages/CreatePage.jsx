@@ -23,7 +23,7 @@ const CreatePage = () => {
       setValue("productName", name.charAt(0).toUpperCase() + name.slice(1), {
         shouldValidate: true,
       })}
-  }, [name, setValue]);
+  }, [name]);
 
 
   const addProduct = async(productObj) => {
@@ -40,14 +40,14 @@ const CreatePage = () => {
   
 
   const onSubmit = async (productObj) => {
-    reset()
     toast.promise(
       addProduct(productObj),
       {
-        pending: "Fetching data... ⏳",
-        success: "Pruduct added successfully! 🎉",
-        error: "Failed to fetch data. ❌",
+        pending: "Fetching data...",
+        success: "Pruduct added successfully!",
+        error: "Failed to fetch data.",
       }) 
+      reset()
   }
 
 

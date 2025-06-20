@@ -32,6 +32,9 @@ export const addProduct = async(req, res) => {
 export const updatedProduct = async(req, res) => {
     const {id} = req.params
     const product = req.body
+    if(!product.productName || !product.productPrice || !product.imgLink){
+        return res.status(400).json({success: false, message: "Please enter all the details"})
+    }
     if(!mongoose.Types.ObjectId.isValid){
         res.status(404).json({success: false, message: "Product not found"})
     }
