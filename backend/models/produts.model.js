@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { float } from "webidl-conversions";
 
 const productSchema = new mongoose.Schema({
     productName : {
