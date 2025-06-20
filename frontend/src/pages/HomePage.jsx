@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { FaRegEdit } from "react-icons/fa";
@@ -6,15 +5,12 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import EditForm from './EditForm';
 import { ToastContainer, toast, Flip } from 'react-toastify';
-
+import Footer from '../../components/Footer';
 
 const HomePage = () => {
   const [allProducts, setAllProducts] = useState([])
   const [popUp, setPopup] = useState(false)
   const [editedProduct, setEditedProduct] = useState()
-  
-
-
 
   async function getProducts() {
     const products = await fetch("/api/products")
@@ -22,20 +18,25 @@ const HomePage = () => {
     setAllProducts(data.data)
   }
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
-      method: "DELETE"
+    const res = await fetch(`api/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': "application/json"
+      }
     })
     const data = await res.json()
     console.log(data)
-    setAllProducts(allProducts.filter(elem => elem._id !== id))
-
+    if (res.ok) {
+      toast.success("Product deleted successfully");
+      setAllProducts(allProducts.filter(elem => elem._id !== id));
+    } else {
+      toast.error("Failed to delete product");
+    }
   }
-
   const handleEdit = (id) => {
     setPopup(true)
     setEditedProduct(allProducts.filter(elem => elem._id === id)[0])
   }
-
   const updateData = async (editedProducts) => {
     setPopup(false)
     const res = await fetch(`api/products/${editedProducts._id}`, {
@@ -53,8 +54,6 @@ const HomePage = () => {
     getProducts()
 
   }
-
-
   useEffect(() => {
     getProducts()
 
@@ -95,10 +94,9 @@ const HomePage = () => {
               </div>)
           })}
         </div>
-
-
         {popUp && <EditForm updateData={updateData} onClose={() => setPopup(false)} defaultValues={editedProduct} />}
       </div>
+          <Footer/>
     </>
   )
 }

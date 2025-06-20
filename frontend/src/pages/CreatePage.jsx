@@ -23,7 +23,7 @@ const CreatePage = () => {
       setValue("productName", name.charAt(0).toUpperCase() + name.slice(1), {
         shouldValidate: true,
       })}
-  }, [name, setValue]);
+  }, [name]);
 
 
   const addProduct = async(productObj) => {
@@ -40,23 +40,23 @@ const CreatePage = () => {
   
 
   const onSubmit = async (productObj) => {
-    reset()
     toast.promise(
       addProduct(productObj),
       {
-        pending: "Fetching data... ⏳",
-        success: "Pruduct added successfully! 🎉",
-        error: "Failed to fetch data. ❌",
+        pending: "Fetching data...",
+        success: "Pruduct added successfully!",
+        error: "Failed to fetch data.",
       }) 
+      reset()
   }
 
 
   return (
     < >
       <div className="absolute  inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(130%_113%_at_50%_-10%,#eaeaea_40%,#00b0ffba_100%)]"></div>
-      <div className='flex pt-18 justify-center relative'>
+      <div className='flex justify-center pt-24 relative'>
 
-        <form className="relative  w-lg mx-4 my-9 bg-white p-6 shadow-2xl rounded-lg" onSubmit={handleSubmit(onSubmit)}>
+        <form className="  w-lg mx-4 my-9 bg-white p-6 shadow-2xl rounded-lg" onSubmit={handleSubmit(onSubmit)}>
           <NavLink to="/" className="absolute right-1 top-1 py-1.5 px-2" ><GiTireIronCross /></NavLink>
           {/* Product Name */}
           {isSubmitting && <div className=' absolute bg-blue-200/0 right-52 top-32 z-10 '><Commet color="#32cd32" size="medium" /></div>}
